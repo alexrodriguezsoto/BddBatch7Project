@@ -1,0 +1,13 @@
+{
+  "id":"",
+  "created":"2021-03-11T10:15:20.845Z",
+  "lastModified":"2021-03-11T06:15:20.845Z",
+  "userId":"{{userId}}",
+  "workspaceId":"{{workspaceId}}",
+  "name":"",
+  "description":"testing",
+  "type":"DESIGN",
+  "tags":[
+
+  ]
+}
