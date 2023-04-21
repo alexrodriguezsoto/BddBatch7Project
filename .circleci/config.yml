@@ -2,23 +2,16 @@ version: 2
 jobs:
   build:
     docker:
-      - image: maven:3.8.4-jdk-11
-        environment:
-          CHROME_BIN: /usr/bin/google-chrome
-          CHROME_PATH: /opt/google/chrome/chrome
+      - image: circleci/java:11
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "pom.xml" }}
-            - v1-dependencies-
       - run:
           name: Install Dependencies
-          command: mvn clean install -DskipTests=true
-      - save_cache:
-          paths:
-            - ~/.m2
-          key: v1-dependencies-{{ checksum "pom.xml" }}
+          command: mvn install -B -DskipTests=true
       - run:
-          name: Run Tests
+          name: Run Selenium Tests
           command: mvn test -Dtest=apiRunner -Dcucumber.filter.tags="@test1"
+      - store_test_results:
+          path: target/surefire-reports
+      - store_artifacts:
+          path: target/cucumber-reports
