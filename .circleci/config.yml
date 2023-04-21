@@ -11,7 +11,7 @@ jobs:
             - v1-dependencies-
       - run:
           name: Install Dependencies
-          command: mvn clean install -DskipTests=true
+          command: mvn clean install
       - save_cache:
           paths:
             - ~/.m2
