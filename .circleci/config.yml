@@ -8,14 +8,6 @@ jobs:
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "pom.xml" }}
-            - v1-dependencies-
-#       - run:
-#           name: Install Dependencies
-#           command: mvn clean install
-#       - save_cache:
-#           paths:
-#             - ~/.m2
-#           key: v1-dependencies-{{ checksum "pom.xml" }}
       - run:
           name: Run Tests
           command: mvn test -Dtest=apiRunner -Dcucumber.filter.tags="@test1"
@@ -23,3 +15,8 @@ jobs:
           path: target/surefire-reports
       - store_artifacts:
           path: target/cucumber-reports
+      - run:
+          name: Generate API Response Report
+          command: mvn site -DgenerateReports=false
+      - store_artifacts:
+          path: target/site/allure-maven-plugin
