@@ -13,10 +13,6 @@ jobs:
           command: mvn test -Dtest=apiRunner -Dcucumber.filter.tags="@test1"
       - store_test_results:
           path: target/surefire-reports
+          path: target/cucumber-reports
       - store_artifacts:
           path: target/cucumber-reports
-      - run:
-          name: Generate API Response Report
-          command: mvn site -DgenerateReports=false
-      - store_artifacts:
-          path: target/site/allure-maven-plugin
